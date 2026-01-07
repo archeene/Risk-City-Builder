@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk City Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <img id="map-background" src="Asset/map.png" alt="Risk Map">
+
+        <div id="territories-container"></div>
+
+        <div id="left-menu" class="hidden">
+            <h2 id="territory-name">Territory</h2>
+            <div class="menu-section">
+                <h3>Military Units</h3>
+                <p id="military-units">0</p>
+            </div>
+            <div class="menu-section">
+                <h3>Civilians</h3>
+                <p id="civilians">0</p>
+            </div>
+            <div class="menu-section">
+                <h3>Buildings</h3>
+                <div id="buildings-list"></div>
+            </div>
+            <div class="menu-section">
+                <h3>Construction</h3>
+                <div id="construction-list"></div>
+            </div>
+            <button id="close-menu">Close</button>
+        </div>
+
+        <div id="right-menu">
+            <button id="end-turn">End Turn</button>
+
+            <div class="menu-section">
+                <h3>Players</h3>
+                <div id="players-list"></div>
+            </div>
+
+            <div class="menu-section">
+                <h3>Quest Cards</h3>
+                <div id="quest-cards">
+                    <img src="Asset/infantry_quest.png" alt="Infantry Quest">
+                    <img src="Asset/knight_quest.png" alt="Knight Quest">
+                    <img src="Asset/catapult_quest.png" alt="Catapult Quest">
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h3>Materials</h3>
+                <div id="materials">
+                    <div class="resource"><span>Gold:</span> <span id="gold">0</span></div>
+                    <div class="resource"><span>Logs:</span> <span id="logs">0</span></div>
+                    <div class="resource"><span>Lumber:</span> <span id="lumber">0</span></div>
+                    <div class="resource"><span>Stone:</span> <span id="stone">0</span></div>
+                    <div class="resource"><span>Coal:</span> <span id="coal">0</span></div>
+                    <div class="resource"><span>Iron:</span> <span id="iron">0</span></div>
+                    <div class="resource"><span>Pigskins:</span> <span id="pigskins">0</span></div>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h3>Food</h3>
+                <div id="food">
+                    <div class="resource"><span>Wheat:</span> <span id="wheat">0</span></div>
+                    <div class="resource"><span>Flour:</span> <span id="flour">0</span></div>
+                    <div class="resource"><span>Bread:</span> <span id="bread">0</span></div>
+                    <div class="resource"><span>Wine:</span> <span id="wine">0</span></div>
+                    <div class="resource"><span>Sausages:</span> <span id="sausages">0</span></div>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h3>Armory</h3>
+                <div id="armory">
+                    <div class="resource"><span>Axe:</span> <span id="axe">0</span></div>
+                    <div class="resource"><span>Bow:</span> <span id="bow">0</span></div>
+                    <div class="resource"><span>Sword:</span> <span id="sword">0</span></div>
+                    <div class="resource"><span>Wooden Shield:</span> <span id="wooden-shield">0</span></div>
+                    <div class="resource"><span>Iron Shield:</span> <span id="iron-shield">0</span></div>
+                    <div class="resource"><span>Iron Armor:</span> <span id="iron-armor">0</span></div>
+                    <div class="resource"><span>Leather Armor:</span> <span id="leather-armor">0</span></div>
+                    <div class="resource"><span>Horses:</span> <span id="horses">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

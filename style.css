@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: #2a1810;
+    color: #f4e4c1;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#map-background {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#territories-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.territory {
+    position: absolute;
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 11px;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.9);
+    transition: all 0.2s;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    backdrop-filter: blur(2px);
+}
+
+.territory:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 10;
+    border-color: #daa520;
+    box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
+}
+
+.territory.player1 {
+    background: rgba(220, 20, 60, 0.75);
+    border-color: #8b0000;
+}
+
+.territory.player2 {
+    background: rgba(30, 144, 255, 0.75);
+    border-color: #000080;
+}
+
+.territory.player3 {
+    background: rgba(50, 205, 50, 0.75);
+    border-color: #006400;
+}
+
+.territory.player4 {
+    background: rgba(255, 165, 0, 0.75);
+    border-color: #ff8c00;
+}
+
+.territory.player5 {
+    background: rgba(138, 43, 226, 0.75);
+    border-color: #4b0082;
+}
+
+.territory.player6 {
+    background: rgba(255, 20, 147, 0.75);
+    border-color: #c71585;
+}
+
+.territory.selected {
+    animation: pulse 1s infinite;
+    border-color: #ffff00;
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.9);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.15); }
+}
+
+#left-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: rgba(42, 24, 16, 0.95);
+    border-right: 3px solid #8b6939;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform 0.3s;
+}
+
+#left-menu.hidden {
+    transform: translateX(-100%);
+}
+
+#left-menu h2 {
+    color: #daa520;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+#left-menu h3 {
+    color: #daa520;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.menu-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #8b6939;
+}
+
+#left-menu p {
+    margin: 5px 0;
+}
+
+#left-menu button {
+    width: 100%;
+    margin-top: 10px;
+    background: linear-gradient(180deg, #8b6939 0%, #5a4030 100%);
+    border: 2px solid #daa520;
+    color: #f4e4c1;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+#left-menu button:hover {
+    background: linear-gradient(180deg, #daa520 0%, #8b6939 100%);
+    transform: translateY(-2px);
+}
+
+#right-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: rgba(42, 24, 16, 0.95);
+    border-left: 3px solid #8b6939;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+#right-menu h3 {
+    color: #daa520;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+#end-turn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, #8b6939 0%, #5a4030 100%);
+    border: 2px solid #daa520;
+    color: #f4e4c1;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+#end-turn:hover {
+    background: linear-gradient(180deg, #daa520 0%, #8b6939 100%);
+    transform: translateY(-2px);
+}
+
+#quest-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#quest-cards img {
+    width: 100%;
+    border: 2px solid #8b6939;
+    border-radius: 4px;
+}
+
+.resource {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin: 4px 0;
+}
+
+.player-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+.player-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    display: inline-block;
+    margin-right: 5px;
+}
