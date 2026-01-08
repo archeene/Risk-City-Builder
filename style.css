@@ -9,21 +9,32 @@ body {
     background: #2a1810;
     color: #f4e4c1;
     overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
-#game-container {
-    width: 100vw;
-    height: 100vh;
+#map-scroll-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 100px;
+    overflow: auto;
+    background: #2a1810;
+    cursor: grab;
+}
+
+#map-wrapper {
     position: relative;
+    width: fit-content;
+    height: fit-content;
+    transform-origin: 0 0;
 }
 
 #map-background {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
+    width: auto;
+    height: auto;
+    display: block;
 }
 
 #territories-container {
@@ -32,10 +43,31 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    pointer-events: none;
+}
+
+.territory-wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    pointer-events: none;
+}
+
+.territory-unit-image {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    pointer-events: none;
+    margin-bottom: -10px;
 }
 
 .territory {
-    position: absolute;
+    position: relative;
     border: 2px solid rgba(0, 0, 0, 0.8);
     background: rgba(255, 255, 255, 0.2);
     cursor: pointer;
@@ -47,15 +79,16 @@ body {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.9);
     transition: all 0.2s;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
     width: 60px;
     height: 60px;
     backdrop-filter: blur(2px);
+    pointer-events: auto;
+    z-index: 2;
 }
 
 .territory:hover {
     background: rgba(255, 255, 255, 0.4);
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: scale(1.2);
     z-index: 10;
     border-color: #daa520;
     box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
@@ -81,55 +114,37 @@ body {
     border-color: #ff8c00;
 }
 
-.territory.player5 {
-    background: rgba(138, 43, 226, 0.75);
-    border-color: #4b0082;
-}
-
-.territory.player6 {
-    background: rgba(255, 20, 147, 0.75);
-    border-color: #c71585;
-}
-
 .territory.selected {
     animation: pulse 1s infinite;
     border-color: #ffff00;
     box-shadow: 0 0 20px rgba(255, 255, 0, 0.9);
 }
 
+.territory.attackable {
+    border-color: #ff0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.9);
+    animation: pulse-red 1s infinite;
+}
+
+.territory.moveable {
+    border-color: #9370db;
+    box-shadow: 0 0 20px rgba(147, 112, 219, 0.9);
+    animation: pulse-purple 1s infinite;
+}
+
 @keyframes pulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.15); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
 }
 
-#left-menu {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 300px;
-    height: 100vh;
-    background: rgba(42, 24, 16, 0.95);
-    border-right: 3px solid #8b6939;
-    padding: 20px;
-    overflow-y: auto;
-    z-index: 100;
-    transition: transform 0.3s;
+@keyframes pulse-red {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 0, 0, 0.9); }
+    50% { transform: scale(1.15); box-shadow: 0 0 30px rgba(255, 0, 0, 1); }
 }
 
-#left-menu.hidden {
-    transform: translateX(-100%);
-}
-
-#left-menu h2 {
-    color: #daa520;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-#left-menu h3 {
-    color: #daa520;
-    font-size: 14px;
-    margin-bottom: 8px;
+@keyframes pulse-purple {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(147, 112, 219, 0.9); }
+    50% { transform: scale(1.15); box-shadow: 0 0 30px rgba(147, 112, 219, 1); }
 }
 
 .menu-section {
@@ -138,40 +153,18 @@ body {
     border-bottom: 1px solid #8b6939;
 }
 
-#left-menu p {
-    margin: 5px 0;
-}
-
-#left-menu button {
-    width: 100%;
-    margin-top: 10px;
-    background: linear-gradient(180deg, #8b6939 0%, #5a4030 100%);
-    border: 2px solid #daa520;
-    color: #f4e4c1;
-    padding: 10px;
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s;
-}
-
-#left-menu button:hover {
-    background: linear-gradient(180deg, #daa520 0%, #8b6939 100%);
-    transform: translateY(-2px);
-}
-
 #right-menu {
     position: fixed;
     right: 0;
     top: 0;
-    width: 250px;
+    width: 200px;
     height: 100vh;
     background: rgba(42, 24, 16, 0.95);
     border-left: 3px solid #8b6939;
+    border-bottom: 3px solid #8b6939;
     padding: 20px;
     overflow-y: auto;
-    z-index: 100;
+    z-index: 101;
 }
 
 #right-menu h3 {
@@ -200,23 +193,19 @@ body {
     transform: translateY(-2px);
 }
 
-#quest-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-#quest-cards img {
-    width: 100%;
-    border: 2px solid #8b6939;
-    border-radius: 4px;
-}
-
 .resource {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     font-size: 12px;
     margin: 4px 0;
+}
+
+.resource img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin-right: 10px;
 }
 
 .player-item {
@@ -234,4 +223,104 @@ body {
     border: 1px solid #000;
     display: inline-block;
     margin-right: 5px;
+}
+
+#bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100px;
+    background: rgba(42, 24, 16, 0.95);
+    border-top: 3px solid #8b6939;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    z-index: 100;
+}
+
+#bottom-menu h3 {
+    color: #daa520;
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+
+#quest-cards {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+#quest-cards h3 {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+#quest-cards img {
+    height: 75px;
+    width: auto;
+    border: 2px solid #daa520;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+#quest-cards img:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+    box-shadow: 0 8px 20px rgba(218, 165, 32, 0.4);
+}
+
+#territory-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#territory-info.hidden {
+    display: none;
+}
+
+#territory-info h2 {
+    color: #daa520;
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.info-item h3 {
+    color: #daa520;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    margin: 2px 0;
+    font-size: 14px;
+}
+
+.info-item button {
+    width: 100%;
+    margin-top: 5px;
+    background: linear-gradient(180deg, #8b6939 0%, #5a4030 100%);
+    border: 2px solid #daa520;
+    color: #f4e4c1;
+    padding: 6px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.info-item button:hover {
+    background: linear-gradient(180deg, #daa520 0%, #8b6939 100%);
 }

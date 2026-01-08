@@ -7,31 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-container">
-        <img id="map-background" src="Asset/map.png" alt="Risk Map">
-
+<div id="map-scroll-container">
+    <div id="map-wrapper">
+        <img id="map-background" src="assets/map.png" alt="Risk Map">
         <div id="territories-container"></div>
-
-        <div id="left-menu" class="hidden">
-            <h2 id="territory-name">Territory</h2>
-            <div class="menu-section">
-                <h3>Military Units</h3>
-                <p id="military-units">0</p>
-            </div>
-            <div class="menu-section">
-                <h3>Civilians</h3>
-                <p id="civilians">0</p>
-            </div>
-            <div class="menu-section">
-                <h3>Buildings</h3>
-                <div id="buildings-list"></div>
-            </div>
-            <div class="menu-section">
-                <h3>Construction</h3>
-                <div id="construction-list"></div>
-            </div>
-            <button id="close-menu">Close</button>
-        </div>
+    </div>
+</div>
 
         <div id="right-menu">
             <button id="end-turn">End Turn</button>
@@ -41,50 +22,107 @@
                 <div id="players-list"></div>
             </div>
 
-            <div class="menu-section">
-                <h3>Quest Cards</h3>
-                <div id="quest-cards">
-                    <img src="Asset/infantry_quest.png" alt="Infantry Quest">
-                    <img src="Asset/knight_quest.png" alt="Knight Quest">
-                    <img src="Asset/catapult_quest.png" alt="Catapult Quest">
-                </div>
-            </div>
+<div class="resource">
+    <span><img src="assets/gold.png" alt="Gold"> Gold</span>
+    <span id="gold">100</span>
+</div>
+<div class="resource">
+    <span><img src="assets/logs.png" alt="Logs"> Logs</span>
+    <span id="logs">50</span>
+</div>
+<div class="resource">
+    <span><img src="assets/lumber.png" alt="Lumber"> Lumber</span>
+    <span id="lumber">20</span>
+</div>
+<div class="resource">
+    <span><img src="assets/stone.png" alt="Stone"> Stone</span>
+    <span id="stone">30</span>
+</div>
+<!-- Add more basic resources if present -->
 
-            <div class="menu-section">
-                <h3>Materials</h3>
-                <div id="materials">
-                    <div class="resource"><span>Gold:</span> <span id="gold">0</span></div>
-                    <div class="resource"><span>Logs:</span> <span id="logs">0</span></div>
-                    <div class="resource"><span>Lumber:</span> <span id="lumber">0</span></div>
-                    <div class="resource"><span>Stone:</span> <span id="stone">0</span></div>
-                    <div class="resource"><span>Coal:</span> <span id="coal">0</span></div>
-                    <div class="resource"><span>Iron:</span> <span id="iron">0</span></div>
-                    <div class="resource"><span>Pigskins:</span> <span id="pigskins">0</span></div>
-                </div>
-            </div>
+<h3>Food</h3>
+<div class="resource">
+    <span><img src="assets/wheat.png" alt="Wheat"> Wheat</span>
+    <span id="wheat">40</span>
+</div>
+<div class="resource">
+    <span><img src="assets/flour.png" alt="Flour"> Flour</span>
+    <span id="flour">20</span>
+</div>
+<div class="resource">
+    <span><img src="assets/bread.png" alt="Bread"> Bread</span>
+    <span id="bread">10</span>
+</div>
+<div class="resource">
+    <span><img src="assets/winebarrel.png" alt="Wine"> Wine</span>
+    <span id="wine">5</span>
+</div>
+<div class="resource">
+    <span><img src="assets/sausage.png" alt="Sausages"> Sausages</span>
+    <span id="sausages">5</span>
+</div>
 
-            <div class="menu-section">
-                <h3>Food</h3>
-                <div id="food">
-                    <div class="resource"><span>Wheat:</span> <span id="wheat">0</span></div>
-                    <div class="resource"><span>Flour:</span> <span id="flour">0</span></div>
-                    <div class="resource"><span>Bread:</span> <span id="bread">0</span></div>
-                    <div class="resource"><span>Wine:</span> <span id="wine">0</span></div>
-                    <div class="resource"><span>Sausages:</span> <span id="sausages">0</span></div>
-                </div>
-            </div>
+<h3>Weapons & Armor</h3>
+<div class="resource">
+    <span><img src="assets/axe.png" alt="Axes"> Axes</span>
+    <span id="axes">2</span>
+</div>
+<div class="resource">
+    <span><img src="assets/bow.png" alt="Bows"> Bows</span>
+    <span id="bows">2</span>
+</div>
+<div class="resource">
+    <span><img src="assets/sword.png" alt="Swords"> Swords</span>
+    <span id="swords">1</span>
+</div>
+<div class="resource">
+    <span><img src="assets/wood_shield.png" alt="Wooden Shields"> Wooden Shields</span>
+    <span id="wooden-shields">3</span>
+</div>
+<div class="resource">
+    <span><img src="assets/iron_shield.png" alt="Iron Shields"> Iron Shields</span>
+    <span id="iron-shields">1</span>
+</div>
+<div class="resource">
+    <span><img src="assets/iron_armor.png" alt="Iron Armor"> Iron Armor</span>
+    <span id="iron-armor">1</span>
+</div>
+<div class="resource">
+    <span><img src="assets/leather_armor.png" alt="Leather Armor"> Leather Armor</span>
+    <span id="leather-armor">2</span>
+</div>
+<div class="resource">
+    <span><img src="assets/horse.png" alt="Horses"> Horses</span>
+    <span id="horses">3</span>
+</div>
+        </div>
 
-            <div class="menu-section">
-                <h3>Armory</h3>
-                <div id="armory">
-                    <div class="resource"><span>Axe:</span> <span id="axe">0</span></div>
-                    <div class="resource"><span>Bow:</span> <span id="bow">0</span></div>
-                    <div class="resource"><span>Sword:</span> <span id="sword">0</span></div>
-                    <div class="resource"><span>Wooden Shield:</span> <span id="wooden-shield">0</span></div>
-                    <div class="resource"><span>Iron Shield:</span> <span id="iron-shield">0</span></div>
-                    <div class="resource"><span>Iron Armor:</span> <span id="iron-armor">0</span></div>
-                    <div class="resource"><span>Leather Armor:</span> <span id="leather-armor">0</span></div>
-                    <div class="resource"><span>Horses:</span> <span id="horses">0</span></div>
+    <div id="bottom-menu">
+        <div id="quest-cards">
+            <h3>Quests</h3>
+            <img src="assets/infantry_quest.png" alt="Infantry Quest">
+            <img src="assets/knight_quest.png" alt="Knight Quest">
+            <img src="assets/catapult_quest.png" alt="Catapult Quest">
+        </div>
+
+        <div id="territory-info" class="hidden">
+            <h2 id="territory-name">Territory</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>Military Units</h3>
+                    <p id="military-units">0</p>
+                </div>
+                <div class="info-item">
+                    <h3>Civilians</h3>
+                    <p id="civilians">0</p>
+                </div>
+                <div class="info-item">
+                    <h3>Buildings</h3>
+                    <div id="buildings-list"></div>
+                </div>
+                <div class="info-item">
+                    <h3>Construction</h3>
+                    <div id="construction-list"></div>
                 </div>
             </div>
         </div>
